@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv47i8ikoqckq"]
+
+[ext_resource type="Script" path="res://explosion.gd" id="1_8xsle"]
+[ext_resource type="Texture2D" uid="uid://bvexnyd5yysun" path="res://art/Retro Impact Effect Pack 3 A.png" id="1_ewn03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4h6f"]
+radius = 21.0238
+
+[sub_resource type="Animation" id="Animation_ak2d2"]
+resource_name = "explosion"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 4]
+}
+
+[sub_resource type="Animation" id="Animation_0iduf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5o0kl"]
+_data = {
+"RESET": SubResource("Animation_0iduf"),
+"explosion": SubResource("Animation_ak2d2")
+}
+
+[node name="effect" type="CharacterBody2D"]
+position = Vector2(300, 180)
+script = ExtResource("1_8xsle")
+metadata/_edit_group_ = true
+
+[node name="explosion" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_ewn03")
+hframes = 5
+region_enabled = true
+region_rect = Rect2(0, 384, 160, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n4h6f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5o0kl")
+}

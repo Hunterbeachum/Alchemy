@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmfagf3kwcfqo"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_y61c5"]
+[ext_resource type="PackedScene" uid="uid://bbygtns4g2q6t" path="res://player.tscn" id="2_ffdpp"]
+[ext_resource type="PackedScene" uid="uid://bu6ko50btgnb2" path="res://item_1.tscn" id="3_sbmlr"]
+[ext_resource type="PackedScene" uid="uid://dv47i8ikoqckq" path="res://explosion.tscn" id="4_j341x"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_y61c5")
+
+[node name="Player" parent="." instance=ExtResource("2_ffdpp")]
+
+[node name="Item1" parent="." instance=ExtResource("3_sbmlr")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -15.5
+offset_right = 0.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="effect" parent="." instance=ExtResource("4_j341x")]
+
+[connection signal="explode" from="Player" to="effect" method="_on_player_explode"]
+[connection signal="pick_up_item" from="Item1" to="Player" method="_on_item_1_pick_up_item"]
